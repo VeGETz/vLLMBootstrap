@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-MODEL_NAME="${MODEL_NAME:-Qwen/Qwen3.6-35B-A3B}"
+MODEL_NAME="${MODEL_NAME:-Qwen/Qwen3.6-35B-A3B-FP8}"
 APP_DIR="${APP_DIR:-/opt/vllm-qwen}"
 PORT="${PORT:-8000}"
 HOST="${HOST:-0.0.0.0}"
-MAX_MODEL_LEN="${MAX_MODEL_LEN:-32768}"
+MAX_MODEL_LEN="${MAX_MODEL_LEN:-auto}"
 GPU_MEMORY_UTILIZATION="${GPU_MEMORY_UTILIZATION:-0.90}"
 MAX_NUM_SEQS="${MAX_NUM_SEQS:-512}"
 
@@ -123,6 +123,8 @@ exec vllm serve "$MODEL_NAME" \
   --tensor-parallel-size "$TP_SIZE" \
   --max-model-len "$MAX_MODEL_LEN" \
   --reasoning-parser qwen3 \
+  --enable-auto-tool-choice \
+  --tool-call-parser qwen3_coder \
   --gpu-memory-utilization "$GPU_MEMORY_UTILIZATION" \
   --max-num-seqs "$MAX_NUM_SEQS" \
   --download-dir "$APP_DIR/models"
