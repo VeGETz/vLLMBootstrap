@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-MODEL_NAME="${MODEL_NAME:-Qwen/Qwen3.6-35B-A3B-FP8}"
+MODEL_NAME="${MODEL_NAME:-Qwen/Qwen3.6-27B-FP8}"
 APP_DIR="${APP_DIR:-/opt/vllm-qwen}"
 SERVICE_NAME="${SERVICE_NAME:-vllm-qwen}"
 
